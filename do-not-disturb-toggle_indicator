@@ -1,0 +1,30 @@
+#!/usr/bin/python
+import subprocess
+
+'''
+For use with xfce and the genmon plugin indicator
+'''
+
+root_path = "/home/adam/Applications/scripts/do-not-disturb/"
+is_dnd = subprocess.check_output(["xfconf-query", "-c", "xfce4-notifyd", "-p", "/do-not-disturb"]).decode('utf-8').strip() == "true"
+if is_dnd :
+    image="silent.png"
+else:
+    image="notify.png"
+tooltip=None
+tooltip = "Do Not Disturb" if is_dnd else "Notificatons On"
+image_path = root_path+image # static indicator icon
+
+
+toggle_command = root_path+("disturb_me" if is_dnd else "do_not_disturb")
+
+_output = []
+
+if image_path:
+    _output.append(f"<img>{image_path}</img>")
+if toggle_command:
+    _output.append(f"<click>{toggle_command}</click>")
+if tooltip:
+    _output.append(f"<tool>{tooltip}</tool>")
+
+[print(el) for el in _output]

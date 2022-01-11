@@ -1,0 +1,3 @@
+#!/bin/bash
+xfconf-query --channel xfce4-notifyd -p /do-not-disturb --set true
+xfce4-panel --plugin-event=genmon-2:refresh:bool:true    

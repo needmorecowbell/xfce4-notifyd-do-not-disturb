@@ -1,0 +1,12 @@
+#!/bin/python3
+import subprocess
+
+
+is_dnd_on = subprocess.check_output(["xfconf-query","xfce4-notifyd", "-p","/do-not-disturb"]).decode('utf-8').strip() == "true"
+
+if (is_dnd_on):
+    print("turning on notifications..")
+    subprocess.run(["sh","/home/adam/Applications/scripts/do-not-disturb/disturb_me"])
+else:
+    print("silencing notifications..")
+    subprocess.run(["sh","/home/adam/Applications/scripts/do-not-disturb/do_not_disturb"])
